@@ -65,8 +65,8 @@
                                             <div class="col-md-5">
                                                 <label class="labels">Jenis Kelamin</label>
                                                 <select name="jenis_kelamin" class="form-control">
-                                                    <option value="Laki-laki"
-                                                        @if($mahasiswa->jenis_kelamin == "Laki-laki") selected @endif>Laki-laki</option>
+                                                    <option value="Laki-Laki"
+                                                        @if($mahasiswa->jenis_kelamin == "Laki-Laki") selected @endif>Laki-Laki</option>
                                                     
                                                     <option value="Perempuan"
                                                         @if($mahasiswa->jenis_kelamin == "Perempuan") selected @endif>Perempuan</option>

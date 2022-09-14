@@ -24,6 +24,7 @@ use App\Http\Controllers\Admin\LulusanController;
 use App\Http\Controllers\Admin\BagianController;
 use App\Http\Controllers\Admin\SoalController;
 use App\Http\Controllers\Admin\JawabanController;
+use App\Http\Controllers\Admin\PilihanController;
 
 use App\Http\Controllers\MahasiswaController;
 
@@ -149,6 +150,9 @@ Route::group( [ 'middleware' => 'auth' ], function(){
     Route::post('store-jawaban', [JawabanController::class, 'store']);
     Route::put('/update-jawaban/{jawaban}', [JawabanController::class, 'update']);
 
+    Route::get('pilihan/{jawaban}', [PilihanController::class, 'pilihan']);
+    Route::post('store-pilihan', [PilihanController::class, 'store']);
+
     Route::post('store-jenis-pedoman', [PedomanController::class, 'pedomanStore']);
     Route::get('show-jenis-pedoman/{jenis_pedoman}', [PedomanController::class, 'pedomanShow']);
     Route::get('edit-jenis-pedoman/{jenis_pedoman}', [PedomanController::class, 'pedomanEdit']);
@@ -214,9 +218,11 @@ Route::get('pedoman-non-akademik', [HomeController::class, 'nonakademik']);
 
 Route::get('/show-pedoman/{jenis_pedoman}', [HomeController::class, 'showPedoman']);
 
+Route::get('tracer', [HomeController::class, 'homeTracer']);
+
 
 Route::get ('/test', [AuthController::class, 'test']);
 Route::get('login', [AuthController::class, 'login'])->name('login');
-Route::post('login', [AuthController::class, 'LoginProses']);
+Route::post('login', [AuthController::class, 'loginproses']);
 Route::get('logout', [AuthController::class, 'logout']);
 

@@ -33,14 +33,14 @@
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Tahun Masuk</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" name="tahun_masuk" value="2015">
+                                <input type="text" class="form-control" name="tahun_masuk" value="{{ $mahasiswa->tahun_masuk }}">
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Tahun Lulus</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" name="tahun_lulus" value="2018">
+                                <input type="text" class="form-control" name="tahun_lulus" value="{{ $mahasiswa->tahun_lulus }}">
                             </div>
                         </div>
 

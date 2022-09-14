@@ -36,6 +36,7 @@
                             <div class="navbar-collapse collapse clearfix">
                                 <ul class="navigation clearfix">
                                     <li class="current" style="color: black"><a href="{{ url('/') }}">Dashboard</a></li>
+                                    
                                     <li class="dropdown"><a href="#">Profil</a>
                                         <ul>
                                             <li><a href="{{ url('profil-pimpinan') }}"> Pimpinan</a></li>
@@ -79,6 +80,7 @@
                                         </ul>
                                     </li>
                                     <li><a href="{{ url('berita') }}">Berita</a></li>
+                                    
                                 </ul>
                             </div>
                         </nav>

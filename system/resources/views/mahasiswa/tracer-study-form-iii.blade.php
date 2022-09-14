@@ -10,6 +10,7 @@
                 <br>
                 @include('section.form')
                 <div class="col-md-12">
+                    @if ($mahasiswa->status_tracing_3 == 0)
                     <div class="widget"><br>
                         <header class="widget-header"><br>
                             <h4 class="widget-title">
@@ -21,7 +22,8 @@
                         <hr class="widget-separator">
 
                         <div class="container">
-                            <form action="{{ url('store-form-I') }}" method="post">
+                            <form action="{{ url('store-form-III') }}" method="post">
+                                <input name="id_mahasiswa" value="{{ $mahasiswa->id }}" type="hidden">
                                 @csrf
                                 @foreach ($list_soal->where('id_bagian', '96ae2407-65d2-4c4f-b204-77b435bd5f4c') as $soal)
                                     <div class="form-group">
@@ -37,61 +39,24 @@
                                                         </div>
                                                     </div>
                                                     <div class="news_post_title_container">
-                                                        @if ($soal->id == '9706a121-df85-438a-8c71-29f5b430ed2c')
-                                                            <div class="news_post_title text-dark">
-                                                                <h4>{{ $loop->iteration }}. {{ $soal->soal }}</h4>
 
-                                                            </div>
-                                                            @foreach ($list_jawaban->where('id_soal', $soal->id) as $jawaban)
-                                                                <div class="form-group" style="margin-left: 2%">
-                                                                    <div class="radio">
-                                                                        <input type="radio" name="jawaban_1"
-                                                                            value="{{ $jawaban->id }}">
-                                                                        <label>{{ $jawaban->jawaban }}</label>
-                                                                    </div>
+                                                        <div class="news_post_title text-dark">
+                                                            <h4>{{ $loop->iteration }}. {{ $soal->soal }}</h4>
+
+                                                        </div>
+                                                        @foreach ($list_jawaban->where('id_soal', $soal->id) as $jawaban)
+                                                            <div class="form-group" style="margin-left: 2%">
+                                                                <div class="radio">
+                                                                    <input type="radio"
+                                                                        name="jawaban[{{ $jawaban->id }}]"
+                                                                        class="form-check-input" required>
+                                                                    <label>{{ $jawaban->jawaban }}</label>
                                                                 </div>
-                                                            @endforeach
-                                                        @endif
+                                                            </div>
+                                                        @endforeach
 
                                                     </div>
 
-                                                    <div class="news_post_title_container">
-                                                        @if ($soal->id == '9706a12f-f70c-452a-a7e0-b24d127c2d3e')
-                                                            <div class="news_post_title text-dark">
-                                                                <h4>{{ $loop->iteration }}. {{ $soal->soal }}</h4>
-
-                                                            </div>
-                                                            @foreach ($list_jawaban->where('id_soal', $soal->id) as $jawaban)
-                                                                <div class="form-group" style="margin-left: 2%">
-                                                                    <div class="radio">
-                                                                        <input type="radio" name="jawaban_2"
-                                                                            value="{{ $jawaban->id }}">
-                                                                        <label>{{ $jawaban->jawaban }}</label>
-                                                                    </div>
-                                                                </div>
-                                                            @endforeach
-                                                        @endif
-
-                                                    </div>
-
-                                                    <div class="news_post_title_container">
-                                                        @if ($soal->id == '9706a151-33bf-40bd-ae0b-44e03279cb0b')
-                                                            <div class="news_post_title text-dark">
-                                                                <h4>{{ $loop->iteration }}. {{ $soal->soal }}</h4>
-
-                                                            </div>
-                                                            @foreach ($list_jawaban->where('id_soal', $soal->id) as $jawaban)
-                                                                <div class="form-group" style="margin-left: 2%">
-                                                                    <div class="radio">
-                                                                        <input type="radio" name="jawaban_3"
-                                                                            value="{{ $jawaban->id }}">
-                                                                        <label>{{ $jawaban->jawaban }}</label>
-                                                                    </div>
-                                                                </div>
-                                                            @endforeach
-                                                        @endif
-
-                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -99,12 +64,21 @@
                                     
                                 @endforeach
                                 <div class="form-group">
-                                    <button class="btn btn-primary text-white btn-center"><i class="fa fa-save"></i>
-                                        Simpan</button>
+                                    <button class="btn btn-primary text-white btn-center" onclick="return confirm('Apakah Anda Yakin Ingin Menyimpan Data Ini?')">
+                                        <i class="fa fa-save"></i>
+                                        Simpan
+                                    </button>
                                 </div>
                             </form>
                         </div>
                     </div>
+                    @endif
+
+                    @if ($mahasiswa->status_tracing_3 == 1)
+                        <div class="alert alert-success alert-block text-center">
+                            <p style="font-family: roboto; font-size: 40px;">Terima Kasih Anda Telah Melakukan Survei</p>
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>

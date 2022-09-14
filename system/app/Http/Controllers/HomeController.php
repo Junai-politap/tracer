@@ -36,6 +36,15 @@ class HomeController extends Controller
 
     // Function Profil Prodi
 
+    public function homeTracer()
+    {
+        $data['list_jenis_pelayanan'] = Jenis_pelayanan::all();
+        $data['list_akreditasi'] = Akreditasi::orderBy('id', 'DESC')->get();
+        $data['list_prodi'] = Prodi::all();
+        $data['list_jenis_pedoman'] = Jenis_pedoman::all();
+
+        return view('home.tracer', $data);
+    }
 
     // function Akademik
 
@@ -202,8 +211,6 @@ class HomeController extends Controller
         return view('home.fasilitas.workspace', $data);
         
     }
-
-   
 
     public function visimisi()
     {

@@ -19,14 +19,14 @@ class MahasiswaController extends Controller
 {
 
     public function index(){
-        $data['mahasiswa'] = auth()->guard('mahasiswa')->user();
+        $data['mahasiswa'] = $mahasiswa = auth()->guard('mahasiswa')->user();
         $data['list_bagian'] = Bagian::all();
         return view('mahasiswa.index', $data);
     }
 
     public function profil()
     {
-        $data['mahasiswa'] = auth()->guard('mahasiswa')->user();
+        $data['mahasiswa'] = $mahasiswa = auth()->guard('mahasiswa')->user();
         return view('mahasiswa.profil', $data);
     }
 
@@ -54,94 +54,177 @@ class MahasiswaController extends Controller
 
     public function tracer(Request $request)
     {
-        $data['mahasiswa'] = auth()->guard('mahasiswa')->user();
+        $data['mahasiswa'] = $mahasiswa = auth()->guard('mahasiswa')->user();
         $data['list_bagian'] = Bagian::all();
         $data['list_soal'] = $list_soal = Soal::all();
         $data['list_jawaban'] = $list_jawaban = Jawaban::all();
         
-        $data['list_form_1'] = $list_form_1 = Form_1::orderBy('id_mahasiswa', 'ASC')->take(1)->get();
 
-        $data['buka_form'] = true;
-        $bagian_1 = $list_form_1->where('level', 2)->count();
-        if($bagian_1 >= 8){
-            $data['buka_form'] = false;
-        }
+    
         return view('mahasiswa.tracer-study', $data);
         
     }
 
     public function formTwo(){
         
-        $data['mahasiswa'] = auth()->guard('mahasiswa')->user();
+        $data['mahasiswa'] = $mahasiswa = auth()->guard('mahasiswa')->user();
         $data['list_bagian'] = Bagian::all();
         $data['list_soal'] = Soal::all();
         $data['list_jawaban'] = Jawaban::all();
+
+        $data['list_form_2'] = Form_2::all();
+
+
         return view('mahasiswa.tracer-study-form-ii', $data);
 
     }
 
     public function form3(){
         
-        $data['mahasiswa'] = auth()->guard('mahasiswa')->user();
+        $data['mahasiswa'] = $mahasiswa = auth()->guard('mahasiswa')->user();
         $data['list_bagian'] = Bagian::all();
         $data['list_soal'] = Soal::all();
         $data['list_jawaban'] = Jawaban::all();
+
+
+
         return view('mahasiswa.tracer-study-form-iii', $data);
 
     }
 
     public function form4(){
         
-        $data['mahasiswa'] = auth()->guard('mahasiswa')->user();
+        $data['mahasiswa'] = $mahasiswa = auth()->guard('mahasiswa')->user();
         $data['list_bagian'] = Bagian::all();
         $data['list_soal'] = Soal::all();
-        $data['list_jawaban'] = Jawaban::all();
+        $data['list_jawaban'] = Jawaban::orderBy('id', 'DESC')->get();
+
+
         return view('mahasiswa.tracer-study-form-iv', $data);
 
     }
 
     public function form5(){
         
-        $data['mahasiswa'] = auth()->guard('mahasiswa')->user();
+        $data['mahasiswa'] = $mahasiswa = auth()->guard('mahasiswa')->user();
         $data['list_bagian'] = Bagian::all();
         $data['list_soal'] = Soal::all();
-        $data['list_jawaban'] = Jawaban::all();
+        $data['list_jawaban'] = Jawaban::orderBy('id', 'DESC')->get();
+
+
         return view('mahasiswa.tracer-study-form-v', $data);
 
     }
 
-    public function tracerForm_I()
+    public function tracerForm_I(Request $request)
     {
         foreach (request('jawaban') as $id_jawaban => $value) {
 
         $form_1 = New Form_1;
         $form_1->id_mahasiswa = request('id_mahasiswa'); 
         $form_1->id_jawaban = $id_jawaban;
+        $form_1->level = 1;
         $form_1->save();
+
+        $id_mahasiswa = request('id_mahasiswa');
+		$mahasiswa = Mahasiswa::where('id', $id_mahasiswa)->get();
+		foreach ($mahasiswa  as $tr) {
+			$tr->status_tracing = 1;
+			$tr->update();
+		}
+
         }
 
         return back()->with('success', 'Terima Kasih Anda Sudah Mengisi Formulir');
     }
 
-    public function tracerForm_II()
+
+    public function tracerForm_II(Request $request)
     {
-        $form_2 = Form_2::find(request('id_mahasiswa'));
-		if($form_2) return back()->with('success', 'Anda Sudah Mengisi Formulir');
+        
+        $form_1 = New Form_2;
+        $form_1->id_mahasiswa = request('id_mahasiswa'); 
+        $form_1->id_jawaban = request('id_jawaban');
+        $form_1->level = 1;
+        $form_1->save();
 
-        $form_2 = New Form_2;
-        $form_2->id_mahasiswa = request('id_mahasiswa'); 
-        $form_2->jawaban_1 = request('jawaban_1');
-        $form_2->jawaban_2 = request('jawaban_2');
-        $form_2->jawaban_3 = request('jawaban_3');
-        $form_2->jawaban_4 = request('jawaban_4');
-        $form_2->jawaban_5 = request('jawaban_5');
-        $form_2->jawaban_6 = request('jawaban_6');
-        $form_2->jawaban_7 = request('jawaban_7');
-        $form_2->jawaban_8 = request('jawaban_8');
-        $form_2->save();
+        $id_mahasiswa = request('id_mahasiswa');
+		$mahasiswa = Mahasiswa::where('id', $id_mahasiswa)->get();
+		foreach ($mahasiswa  as $tr) {
+			$tr->status_tracing_2 = 1;
+			$tr->update();
+		}
 
-        return redirect('tracer-study-form-iii');
+        return back()->with('success', 'Terima Kasih Anda Sudah Mengisi Formulir');
     }
 
-    
+    public function tracerForm_III(Request $request)
+    {
+        foreach (request('jawaban') as $id_jawaban => $value) {
+
+        $form_1 = New Form_3;
+        $form_1->id_mahasiswa = request('id_mahasiswa'); 
+        $form_1->id_jawaban = $id_jawaban;
+        $form_1->level = 1;
+        $form_1->save();
+
+        $id_mahasiswa = request('id_mahasiswa');
+		$mahasiswa = Mahasiswa::where('id', $id_mahasiswa)->get();
+		foreach ($mahasiswa  as $tr) {
+			$tr->status_tracing_3 = 1;
+			$tr->update();
+		}
+
+        }
+
+        return back()->with('success', 'Terima Kasih Anda Sudah Mengisi Formulir');
+    }
+
+
+    public function tracerForm_IV(Request $request)
+    {
+        foreach (request('jawaban') as $id_jawaban => $value) {
+
+        $form_1 = New Form_4;
+        $form_1->id_mahasiswa = request('id_mahasiswa'); 
+        $form_1->id_jawaban = $id_jawaban;
+        $form_1->level = 1;
+        $form_1->save();
+
+        $id_mahasiswa = request('id_mahasiswa');
+		$mahasiswa = Mahasiswa::where('id', $id_mahasiswa)->get();
+		foreach ($mahasiswa  as $tr) {
+			$tr->status_tracing_4 = 1;
+			$tr->update();
+		}
+
+        }
+
+        return back()->with('success', 'Terima Kasih Anda Sudah Mengisi Formulir');
+    }
+
+
+    public function tracerForm_V(Request $request)
+    {
+        foreach (request('jawaban') as $id_jawaban => $value) {
+
+        $form_1 = New Form_5;
+        $form_1->id_mahasiswa = request('id_mahasiswa'); 
+        $form_1->id_jawaban = $id_jawaban;
+        $form_1->level = 1;
+        $form_1->save();
+
+        $id_mahasiswa = request('id_mahasiswa');
+		$mahasiswa = Mahasiswa::where('id', $id_mahasiswa)->get();
+		foreach ($mahasiswa  as $tr) {
+			$tr->status_tracing_5 = 1;
+			$tr->update();
+		}
+
+        }
+
+        return back()->with('success', 'Terima Kasih Anda Sudah Mengisi Formulir');
+    }
+
+
 }

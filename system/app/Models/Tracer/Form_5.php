@@ -5,22 +5,20 @@ namespace App\Models\Tracer;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Models\Model;
+use App\Models\Mahasiswa;
+use App\Models\Jawaban;
 
-class Form_I extends Model
+class Form_5 extends Model
 {
 
-	public $table = "form_1";
+	public $table = "form_5";
 
 	function Mahasiswa(){
-		return $this->belongsTo('\App\Models\Mahasiswa', 'id_mahasiswa');
-	}
-
-    function Soal(){
-		return $this->belongsTo('\App\Models\Soal', 'id_soal');
+		return $this->belongsTo(Mahasiswa::class, 'id_mahasiswa');
 	}
 
     function Jawaban(){
-		return $this->belongsTo('\App\Models\Jawaban', 'id_jawaban');
+		return $this->belongsTo(Jawaban::class, 'id_jawaban');
 	}
 
 }

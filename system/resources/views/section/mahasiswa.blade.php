@@ -13,7 +13,7 @@
                 <ul>
                     <li class="dropdown">
                         <a href="javascript:void(0)" class="dropdown-toggle usertitle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <small>Mahasiswa</small>
+                            <small>Alumni</small>
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu animated flipInY">

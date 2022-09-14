@@ -29,6 +29,7 @@
                         <li style="font-size: 70%"><a href="{{ url('profil-lulusan') }}">Profil Prodi</a></li>
                         <li style="font-size: 70%"><a href="{{ url('visi-misi') }}">Visi Misi</a></li>
                         <li style="font-size: 70%"><a href="{{ url('profil-dosen') }}">Profil Dosen</a></li>
+                        <li style="font-size: 70%"><a href="{{ url('tracer') }}">Tracer Study</a></li>
                     </ul>
                 </div>
             </div>

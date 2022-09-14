@@ -21,25 +21,7 @@ class MasterMahasiswaController extends Controller
 
     public function store(Request $request)
     {
-        $mahasiswa = New Mahasiswa;
-        $mahasiswa->nim = request('nim');
-        $mahasiswa->nama = request('nama');
-        $mahasiswa->username = request('nim');
-        $mahasiswa->password = request('nim');
-        $mahasiswa->confirmasi_pass = request('nim');
-        $mahasiswa->nik = request('nik');
-        $mahasiswa->jenis_kelamin = request('jenis_kelamin');
-        $mahasiswa->agama = request('agama');
-        $mahasiswa->tempat_lahir = request('tempat_lahir');
-        $mahasiswa->tanggal_lahir = request('tanggal_lahir');
-        $mahasiswa->alamat = request('alamat');
-        $mahasiswa->hp = request('hp');
-        $mahasiswa->email = request('email');
-        $mahasiswa->tahun_masuk = request('tahun_masuk');
-        $mahasiswa->tahun_lulus = request('tahun_lulus');
-        $mahasiswa->ipk = request('ipk');
-        $mahasiswa->handleUploadFoto();
-        $mahasiswa->save();
+        
         return redirect('page-mahasiswa')->with('success', 'Data Berhasil di Simpan');
 
     }

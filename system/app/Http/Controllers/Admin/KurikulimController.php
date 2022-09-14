@@ -44,7 +44,7 @@ class KurikulimController extends Controller
 
     public function update(Request $request, $id)
     {
-        $matakuliah = New Matakuliah;
+        $matakuliah = Matakuliah::find($id);
         $matakuliah->kode = request('kode');
         $matakuliah->nama = request('nama');
         $matakuliah->semester = request('semester');
